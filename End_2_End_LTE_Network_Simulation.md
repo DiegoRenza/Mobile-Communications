@@ -58,3 +58,51 @@ Instalar SrsRAN
 sudo make install
 sudo srsran_install_configs.sh service
 ```
+
+Instalar el driver ZeroMQ
+-------------
+
+Instalar libtool (ejecutar desde la carpeta raíz):
+
+```python 
+sudo apt-get update
+sudo apt-get install libtool 
+```
+
+Instalar libzmq
+```python 
+git clone https://github.com/zeromq/libzmq.git
+cd libzmq
+./autogen.sh
+./configure
+make
+sudo make install
+sudo ldconfig
+```
+
+Instalar czmq (instalar desde carpeta raíz)
+```python
+git clone https://github.com/zeromq/czmq.git
+cd czmq
+./autogen.sh
+./configure
+make
+sudo make install
+sudo ldconfig
+```
+
+Compilar SrsRAN (desde la carpeta srsRAN/build)
+```python
+cmake ../
+make
+```
+
+Es necesario verificar que la salida de la compilación incluya la detección del driver en las siguientes líneas:
+```python
+...
+-- FINDING ZEROMQ.
+-- Checking for module 'ZeroMQ'
+-- No package 'ZeroMQ' found
+-- Found libZEROMQ: /usr/local/include, /usr/local/lib/libzmq.so
+...
+```
